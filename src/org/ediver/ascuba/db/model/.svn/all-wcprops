@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/10/trunk/ascuba/aScuba/src/org/ediver/ascuba/db/model
+END
+DiveManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/10/trunk/ascuba/aScuba/src/org/ediver/ascuba/db/model/DiveManager.java
+END
+Dive.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/10/trunk/ascuba/aScuba/src/org/ediver/ascuba/db/model/Dive.java
+END
+Diver.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/10/trunk/ascuba/aScuba/src/org/ediver/ascuba/db/model/Diver.java
+END
+DiveSite.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/10/trunk/ascuba/aScuba/src/org/ediver/ascuba/db/model/DiveSite.java
+END
