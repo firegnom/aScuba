@@ -1,5 +1,10 @@
 package org.ediver.ascuba;
 
+import java.util.ResourceBundle;
+
+import mvplan.main.Mvplan;
+import mvplan.prefs.Prefs;
+
 import org.ediver.ascuba.db.DBManager;
 
 import android.app.Application;
@@ -12,6 +17,11 @@ public class AScuba extends Application {
 	public static final String TAG = "org.ediver.ascuba";
 	@Override
 	public void onCreate() {
+		Mvplan mv = new Mvplan();
+		Prefs prefs = new Prefs();
+		Mvplan.stringResource = ResourceBundle.getBundle("mvplan/resources/strings");
+		Mvplan.prefs = prefs;
+		Mvplan.prefs.setDefaultPrefs();
 		super.onCreate();
 		try {
 			Log.d(TAG,"Starting ediver version: "+ getPackageManager().getPackageInfo( "org.ediver.ascuba",0 ).versionName);

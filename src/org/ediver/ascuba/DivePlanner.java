@@ -1,41 +1,33 @@
 package org.ediver.ascuba;
 
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+import mvplan.dive.Profile;
 import mvplan.gas.Gas;
-
-import org.ediver.ascuba.gui.GasDialog;
-import org.ediver.ascuba.gui.GasDialogCallback;
-
-import android.content.Context;
+import mvplan.gui.android.ProfilePrinter;
+import mvplan.main.Mvplan;
+import mvplan.model.Model;
+import mvplan.prefs.Prefs;
+import mvplan.segments.SegmentAbstract;
+import mvplan.segments.SegmentDive;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class Welcome extends AScubaActivity implements GasDialogCallback{
+public class DivePlanner extends AScubaActivity {
 	TextView view;
 	Button b;
-	Context c ;
-	GasDialog gasDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		c = this;
+		
 		setContentView(R.layout.welcome);
-		b =  (Button) findViewById(R.id.ButtonOpenDivelog);
-		b.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				open(DIVELOG);
-			}
-		});
-		b =  (Button) findViewById(R.id.ButtonOpenPlanner);
-		gasDialog = new GasDialog(this,this);
-		b.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				gasDialog.show();
-			}
-		});
+
 		
 //		view =  (TextView) findViewById(R.id.TextView0);
 //		b =  (Button) findViewById(R.id.Button01);
@@ -82,11 +74,6 @@ public class Welcome extends AScubaActivity implements GasDialogCallback{
 //				
 //			}
 //		});
-		
-	}
-
-	public void notify(Gas g) {
-		// TODO Auto-generated method stub
 		
 	}
 
