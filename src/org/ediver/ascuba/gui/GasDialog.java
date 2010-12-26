@@ -267,7 +267,8 @@ public class GasDialog extends Dialog {
 			}
 			gas.setFO2(fo2);
 			gas.setFHe(fhe2);
-
+			gas.setMod(Gas.getMod(gas.getFO2(), ppo2));
+			
 			redrawGas();
 		}
 	}
