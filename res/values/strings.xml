@@ -15,11 +15,11 @@
 <string name="OpenPlanner">dive planner</string>
 <string name="OpenDiveLog">Open dive log </string>
 <string name="welcome_intro">Intro text </string>
-<string name="gas_dialog_he2_label">He2 : </string>
-<string name="gas_dialog_o2_label">O2 : </string>
-<string name="gas_dialog_ppo2_label">ppO2 : </string>
-<string name="gas_dialog_n2_label">N2 : </string>
-<string name="gas_dialog_mod_label">MOD : </string>
+<string name="gas_dialog_he2_label">He2</string>
+<string name="gas_dialog_o2_label">O2</string>
+<string name="gas_dialog_ppo2_label">ppO2</string>
+<string name="gas_dialog_n2_label">N2</string>
+<string name="gas_dialog_mod_label">MOD</string>
 <string name="gas_dialog_title">Edit gas</string>
 
 </resources>
