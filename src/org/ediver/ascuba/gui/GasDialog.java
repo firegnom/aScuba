@@ -60,6 +60,12 @@ public class GasDialog extends Dialog {
 
 	}
 
+	public GasDialog(Context context, Gas gas, GasDialogCallback callback) {
+		super(context);
+		this.callback = callback;
+		this.gas = gas;
+		ppo2 = Gas.getppO2(gas.getFO2(), gas.getMod());
+	}
 	public GasDialog(Context context, Gas gas) {
 		super(context);
 		this.gas = gas;
