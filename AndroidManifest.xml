@@ -11,6 +11,8 @@
 		</activity>
 		<activity android:name=".NewDive"></activity>
 		<activity android:name=".EditDive"></activity>
+		<activity android:name=".DivePlanner"></activity>
+		<activity android:name=".GasList"></activity>
 		<activity android:name=".Dives"></activity>
 	</application>
 

@@ -22,6 +22,7 @@ public class AScuba extends Application {
 		Mvplan.stringResource = ResourceBundle.getBundle("mvplan/resources/strings");
 		Mvplan.prefs = prefs;
 		Mvplan.prefs.setDefaultPrefs();
+		//Mvplan.prefs.setUnitsTo(Prefs.IMPERIAL);
 		super.onCreate();
 		try {
 			Log.d(TAG,"Starting ediver version: "+ getPackageManager().getPackageInfo( "org.ediver.ascuba",0 ).versionName);

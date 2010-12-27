@@ -52,10 +52,9 @@ public class GasDialog extends Dialog {
 	Button ok;
 	Button cancel;
 	
-	SoftReference<GasDialog> _this;
-
 	public GasDialog(Context context, GasDialogCallback callback) {
 		super(context);
+		this.callback = callback;
 		ppo2 = 1.4;
 		gas = new Gas(0.0, 0.32, Gas.getMod(0.32, ppo2));
 
@@ -107,7 +106,6 @@ public class GasDialog extends Dialog {
 		ok.setOnClickListener(okListener);
 
 		
-		_this= new SoftReference<GasDialog>(this);
 		//
 		LayoutParams params = getWindow().getAttributes();
 		//params.height = LayoutParams.FILL_PARENT;
@@ -234,22 +232,15 @@ public class GasDialog extends Dialog {
 	
 	android.view.View.OnClickListener cancelListener = new android.view.View.OnClickListener() {
 		public void onClick(View v) {
-			GasDialog gasDialog = _this.get();
-			if (gasDialog == null){
-				throw new WTFExeption("Soft reference to dialog is gone while the button is pressed . This shouldn't happen !!!");
-			}
-			gasDialog.dismiss();
+			GasDialog.this.dismiss();
 		}
 
 	};
 	
 	android.view.View.OnClickListener okListener = new android.view.View.OnClickListener() {
 		public void onClick(View v) {
-			GasDialog gasDialog = _this.get();
-			if (gasDialog == null){
-				throw new WTFExeption("Soft reference to dialog is gone while the button is pressed . This shouldn't happen !!!");
-			}
-			callback.notify(gas);
+			GasDialog.this.callback.notify(gas);
+			GasDialog.this.dismiss();
 		}
 
 	};

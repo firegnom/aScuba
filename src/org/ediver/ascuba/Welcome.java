@@ -16,7 +16,6 @@ public class Welcome extends AScubaActivity implements GasDialogCallback{
 	TextView view;
 	Button b;
 	Context c ;
-	GasDialog gasDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +29,10 @@ public class Welcome extends AScubaActivity implements GasDialogCallback{
 			}
 		});
 		b =  (Button) findViewById(R.id.ButtonOpenPlanner);
-		gasDialog = new GasDialog(this,this);
+		
 		b.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				gasDialog.show();
+				open(DIVEPLANNER);
 			}
 		});
 		

@@ -1,80 +1,66 @@
 package org.ediver.ascuba;
 
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-
-import mvplan.dive.Profile;
-import mvplan.gas.Gas;
-import mvplan.gui.android.ProfilePrinter;
-import mvplan.main.Mvplan;
-import mvplan.model.Model;
-import mvplan.prefs.Prefs;
-import mvplan.segments.SegmentAbstract;
-import mvplan.segments.SegmentDive;
-import android.app.Activity;
+import android.app.ActivityGroup;
+import android.app.LocalActivityManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
+import android.view.Window;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
-public class DivePlanner extends AScubaActivity {
-	TextView view;
-	Button b;
+public class DivePlanner extends ActivityGroup {
+	LinearLayout view;
+	Window gasListAction;
+	Window profileAction ;
+	Window calculateAction ;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		setContentView(R.layout.welcome);
+		setContentView(R.layout.dive_planner_view);
+		view = (LinearLayout) findViewById(R.id.testme);
+		LocalActivityManager localActivityManager = getLocalActivityManager();
+		profileAction = localActivityManager.startActivity("test", new Intent(
+				this, Welcome.class));
+		calculateAction = localActivityManager.startActivity("test", new Intent(
+				this, Welcome.class));
+		gasListAction = localActivityManager.startActivity("test", new Intent(this,
+				GasList.class));
+		view.addView(gasListAction.getDecorView(), LayoutParams.FILL_PARENT,
+				LayoutParams.FILL_PARENT);
 
+		Button b = (Button) findViewById(R.id.dive_planner_calculate);
+		b.setOnClickListener(calculateButtonListener);
 		
-//		view =  (TextView) findViewById(R.id.TextView0);
-//		b =  (Button) findViewById(R.id.Button01);
-//		b.setOnClickListener(new OnClickListener() {
-//			
-//			public void onClick(View v) {
-//				Mvplan mv = new Mvplan();
-//				Prefs prefs = new Prefs();
-//				Mvplan.stringResource = ResourceBundle.getBundle("mvplan/resources/strings");
-//				Mvplan.prefs = prefs;
-//				Mvplan.prefs.setDefaultPrefs();
-//
-//
-//				ArrayList<SegmentAbstract> knownSegments = new ArrayList<SegmentAbstract>();
-//				ArrayList<Gas> knownGases = new ArrayList<Gas>();
-//
-//				Gas g = new Gas(0, 0.21, 66.0);
-//				knownGases.add(g);
-//				SegmentDive s = new SegmentDive(20, 40, g, 0);
-//				knownSegments.add(s);
-//				
-//
-//				Profile p = new Profile(knownSegments, knownGases, null);
-//				//m.printModel();
-//				int returnCode = p.doDive();
-//				Profile currentProfile;
-//				switch (returnCode) {
-//				case Profile.SUCCESS:
-//					currentProfile = p; // Save as current profile
-//					p.doGasCalcs(); // Calculate gases
-//					// Save Model
-//					Model currentModel = p.getModel();
-//					// System.out.println("Dive Metadata:"+currentModel.getMetaData());
-//					StringBuffer b = new StringBuffer();
-//					new ProfilePrinter(currentProfile, b).doPrintTable();
-//
-//					System.out.println(b);
-//					view.setText(b);
-//					break;
-//
-//				default:
-//					break;
-//				}
-//				
-//			}
-//		});
-		
+		b = (Button) findViewById(R.id.dive_planner_gasList);
+		b.setOnClickListener(gasListButtonListener);
+
+		b = (Button) findViewById(R.id.dive_planner_profile);
+		b.setOnClickListener(profileButtonListener);
 	}
+
+	android.view.View.OnClickListener calculateButtonListener = new android.view.View.OnClickListener() {
+		public void onClick(View v) {
+			view.removeAllViews();
+			view.addView(calculateAction.getDecorView(), LayoutParams.FILL_PARENT,
+					LayoutParams.FILL_PARENT);
+		}
+	};
+	android.view.View.OnClickListener gasListButtonListener = new android.view.View.OnClickListener() {
+		public void onClick(View v) {
+			view.removeAllViews();
+			view.addView(gasListAction.getDecorView(), LayoutParams.FILL_PARENT,
+					LayoutParams.FILL_PARENT);
+		}
+	};
+	android.view.View.OnClickListener profileButtonListener = new android.view.View.OnClickListener() {
+		public void onClick(View v) {
+			view.removeAllViews();
+			view.addView(profileAction.getDecorView(), LayoutParams.FILL_PARENT,
+					LayoutParams.FILL_PARENT);
+		}
+	};
 
 }
