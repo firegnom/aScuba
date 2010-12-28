@@ -1,12 +1,10 @@
 package org.ediver.ascuba.gui;
 
-import java.lang.ref.SoftReference;
 import java.text.NumberFormat;
 
 import mvplan.gas.Gas;
 
 import org.ediver.ascuba.R;
-import org.ediver.ascuba.WTFExeption;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -63,7 +61,7 @@ public class GasDialog extends Dialog {
 	public GasDialog(Context context, Gas gas, GasDialogCallback callback) {
 		super(context);
 		this.callback = callback;
-		this.gas = gas;
+		this.gas = (Gas) gas.clone();
 		ppo2 = Gas.getppO2(gas.getFO2(), gas.getMod());
 	}
 	public GasDialog(Context context, Gas gas) {
