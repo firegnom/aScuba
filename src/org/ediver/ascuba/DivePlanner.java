@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 public class DivePlanner extends ActivityGroup {
 	LinearLayout view;
 	Window gasListAction;
-	Window profileAction ;
+	Window segmentAction ;
 	Window calculateAction ;
 
 	@Override
@@ -22,15 +22,14 @@ public class DivePlanner extends ActivityGroup {
 		setContentView(R.layout.dive_planner_view);
 		view = (LinearLayout) findViewById(R.id.testme);
 		LocalActivityManager localActivityManager = getLocalActivityManager();
-		profileAction = localActivityManager.startActivity("test", new Intent(
-				this, Welcome.class));
-		calculateAction = localActivityManager.startActivity("test", new Intent(
-				this, Welcome.class));
-		gasListAction = localActivityManager.startActivity("test", new Intent(this,
+		segmentAction = localActivityManager.startActivity("segmentAction", new Intent(
+				this, SegmentList.class));
+		calculateAction = localActivityManager.startActivity("calculateAction", new Intent(
+				this, ProfileView.class));
+		gasListAction = localActivityManager.startActivity("gasListAction", new Intent(this,
 				GasList.class));
 		view.addView(gasListAction.getDecorView(), LayoutParams.FILL_PARENT,
 				LayoutParams.FILL_PARENT);
-
 		Button b = (Button) findViewById(R.id.dive_planner_calculate);
 		b.setOnClickListener(calculateButtonListener);
 		
@@ -44,6 +43,8 @@ public class DivePlanner extends ActivityGroup {
 	android.view.View.OnClickListener calculateButtonListener = new android.view.View.OnClickListener() {
 		public void onClick(View v) {
 			view.removeAllViews();
+			ProfileView p = (ProfileView)(DivePlanner.this.getLocalActivityManager().getActivity("calculateAction"));
+			p.calculate();
 			view.addView(calculateAction.getDecorView(), LayoutParams.FILL_PARENT,
 					LayoutParams.FILL_PARENT);
 		}
@@ -58,7 +59,7 @@ public class DivePlanner extends ActivityGroup {
 	android.view.View.OnClickListener profileButtonListener = new android.view.View.OnClickListener() {
 		public void onClick(View v) {
 			view.removeAllViews();
-			view.addView(profileAction.getDecorView(), LayoutParams.FILL_PARENT,
+			view.addView(segmentAction.getDecorView(), LayoutParams.FILL_PARENT,
 					LayoutParams.FILL_PARENT);
 		}
 	};

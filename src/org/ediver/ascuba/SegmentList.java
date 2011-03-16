@@ -1,0 +1,127 @@
+package org.ediver.ascuba;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import mvplan.main.Mvplan;
+import mvplan.segments.SegmentAbstract;
+
+import org.ediver.ascuba.gui.GasDialog;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.TextView;
+
+public class SegmentList extends AScubaActivity {
+	Button add;
+	ListView list;
+	SegmentListAdaptor a;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.segment_list_view);
+		list = (ListView) findViewById(R.id.segment_list_list);
+		add = (Button) findViewById(R.id.segment_list_add);
+		//add.setOnClickListener(addButtonListener);
+		a = new SegmentListAdaptor(this.getApplicationContext(),
+				R.layout.segment_list_label, R.id.segment_list_label_text,
+				Mvplan.prefs.getPrefSegments());
+		list.setAdapter(a);
+		
+		
+	}
+
+	/*android.view.View.OnClickListener addButtonListener = new android.view.View.OnClickListener() {
+		public void onClick(View v) {
+			new GasDialog(SegmentList.this, addCallback).show();
+		}
+	};
+
+	SegmentDialogCallback addCallback = new SegmentDialogCallback() {
+		public void notify(SegmentAbstract g) {
+			Mvplan.prefs.getPrefGases().add(g);
+			System.out.println(g);
+			a.notifyDataSetChanged();
+
+		}
+	};*/
+
+	private class SegmentListAdaptor extends ArrayAdapter<SegmentAbstract> {
+
+		List <SegmentAbstract> selected;
+		public SegmentListAdaptor(Context context, int resource,
+				int textViewResourceId, List<SegmentAbstract> objects) {
+			super(context, resource, textViewResourceId, objects);
+			selected = new ArrayList<SegmentAbstract>();
+			//TOTO save selected somewhere;
+		}
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			View a =  super.getView(position, convertView, parent);
+			
+			SegmentAbstract item = getItem(position);
+			//handle buttons
+			ImageButton b = (ImageButton) a.findViewById(R.id.segment_list_label_edit);
+			b.setTag(new Integer(position));
+			b.setOnClickListener(editButtonListener);
+			b = (ImageButton) a.findViewById(R.id.segment_list_label_delete);
+			b.setTag(new Integer(position));
+			b.setOnClickListener(deleteButtonListener);
+			
+			//handle checkbox;
+			CheckBox cb = (CheckBox) a.findViewById(R.id.segment_list_label_check_box);
+			cb.setOnCheckedChangeListener(checkedListener);
+			cb.setTag(new Integer(position));
+			cb.setChecked(item.getEnable());
+			
+			TextView text = (TextView) a.findViewById(R.id.segment_list_label_text);
+			text.setText(item.getTime()+"min@"+item.getDepth()+"m|sp:"+item.getSetpoint());
+			return a;
+		}
+		
+		android.view.View.OnClickListener editButtonListener = new android.view.View.OnClickListener() {
+			public void onClick(View v) {
+				
+				SegmentAbstract g = a.getItem((Integer) v.getTag());
+				//EditCallback e = new EditCallback((Integer) v.getTag()); 
+				//new GasDialog(SegmentList.this ,g, e).show();
+			}
+		};
+		
+		android.view.View.OnClickListener deleteButtonListener = new android.view.View.OnClickListener() {
+			public void onClick(View v) {
+				a.remove(a.getItem((Integer) v.getTag()));
+			}
+		};
+		
+		OnCheckedChangeListener checkedListener = new OnCheckedChangeListener() {
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				int position = (Integer) buttonView.getTag();
+				a.getItem(position).setEnable(isChecked);
+			}
+		};
+	}
+	/*private class EditCallback implements SegmentDialogCallback{
+		public EditCallback(int position) {
+			this.position=position;
+		}
+		int position;
+		public void notify(Gas g) {
+			a.remove(a.getItem(position));
+			a.insert(g, position);
+			
+		}
+	}*/
+	
+
+}

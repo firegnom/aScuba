@@ -13,6 +13,8 @@
 		<activity android:name=".EditDive"></activity>
 		<activity android:name=".DivePlanner"></activity>
 		<activity android:name=".GasList"></activity>
+		<activity android:name=".SegmentList"></activity>
+		<activity android:name=".ProfileView"></activity>
 		<activity android:name=".Dives"></activity>
 	</application>
 
@@ -21,5 +23,5 @@
 
 	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
 	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"></uses-permission>
-<uses-sdk android:maxSdkVersion="9" android:targetSdkVersion="9" android:minSdkVersion="4"></uses-sdk>
+<uses-sdk android:maxSdkVersion="11" android:targetSdkVersion="9" android:minSdkVersion="4"></uses-sdk>
 </manifest> 
