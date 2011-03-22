@@ -8,30 +8,26 @@ import android.util.Log;
 import android.widget.TextView;
 
 public class ProfileView extends AScubaActivity {
-	
-	
+
 	TextView view;
-	private String TAG="bbbbbb";
+	private String TAG = "bbbbbb";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.profile_text_view);
 		view = (TextView) findViewById(R.id.profile_text_view_text);
-		Log.d(TAG,"Iaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaane");
-		
-		
+		Log.d(TAG, "Iaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaane");
+
 	}
-	
+
 	public void calculate() {
-		// TODO Auto-generated method stub
-		Log.d(TAG,"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-		// TODO Auto-generated method stub
-		super.onResume();
-		// TODO Auto-generated method stub
+		Log.d(TAG, "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
 		super.onResume();
 		Mvplan.prefs.getPrefGases();
 
-		Profile p = new Profile(Mvplan.prefs.getPrefSegments(),Mvplan.prefs.getPrefGases(), null);
+		Profile p = new Profile(Mvplan.prefs.getPrefSegments(),
+				Mvplan.prefs.getPrefGases(), null);
 		// m.printModel();
 		int returnCode = p.doDive();
 		Profile currentProfile;
@@ -40,7 +36,7 @@ public class ProfileView extends AScubaActivity {
 			currentProfile = p; // Save as current profile
 			p.doGasCalcs(); // Calculate gases
 			// Save Model
-			//Model currentModel = p.getModel();
+			// Model currentModel = p.getModel();
 			// System.out.println("Dive Metadata:"+currentModel.getMetaData());
 			StringBuffer b = new StringBuffer();
 			new ProfilePrinter(currentProfile, b).doPrintTable();
@@ -48,12 +44,27 @@ public class ProfileView extends AScubaActivity {
 			view.setText(b);
 			break;
 
+		case Profile.CEILING_VIOLATION:
+			view.setText(Mvplan
+					.getResource("mvplan.gui.MainFrame.ceilingViolation.text"));
+			break;
+
+		case Profile.NOTHING_TO_PROCESS:
+			view.setText(Mvplan
+					.getResource("mvplan.gui.MainFrame.noSegments.text"));
+			break;
+		case Profile.PROCESSING_ERROR:
+			view.setText(Mvplan
+					.getResource("mvplan.gui.MainFrame.processingError.text"));
+		case Profile.INFINITE_DECO:
+			view.setText(Mvplan
+					.getResource("mvplan.gui.MainFrame.decoNotPossible.text"));
+
 		default:
 			view.setText("Can not calculate");
 			break;
 
 		}
 	}
-	
 
 }

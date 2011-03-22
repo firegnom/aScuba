@@ -5,8 +5,11 @@ import java.util.List;
 
 import mvplan.main.Mvplan;
 import mvplan.segments.SegmentAbstract;
+import mvplan.segments.SegmentDeco;
 
 import org.ediver.ascuba.gui.GasDialog;
+import org.ediver.ascuba.gui.SegmentDialog;
+import org.ediver.ascuba.gui.SegmentDialogCallback;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -16,23 +19,28 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class SegmentList extends AScubaActivity {
 	Button add;
 	ListView list;
 	SegmentListAdaptor a;
+	
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.segment_list_view);
+		
 		list = (ListView) findViewById(R.id.segment_list_list);
 		add = (Button) findViewById(R.id.segment_list_add);
-		//add.setOnClickListener(addButtonListener);
+		add.setOnClickListener(addButtonListener);
 		a = new SegmentListAdaptor(this.getApplicationContext(),
 				R.layout.segment_list_label, R.id.segment_list_label_text,
 				Mvplan.prefs.getPrefSegments());
@@ -41,20 +49,20 @@ public class SegmentList extends AScubaActivity {
 		
 	}
 
-	/*android.view.View.OnClickListener addButtonListener = new android.view.View.OnClickListener() {
+	android.view.View.OnClickListener addButtonListener = new android.view.View.OnClickListener() {
 		public void onClick(View v) {
-			new GasDialog(SegmentList.this, addCallback).show();
+			new SegmentDialog(SegmentList.this, addCallback).show();
 		}
 	};
 
 	SegmentDialogCallback addCallback = new SegmentDialogCallback() {
 		public void notify(SegmentAbstract g) {
-			Mvplan.prefs.getPrefGases().add(g);
+			Mvplan.prefs.getPrefSegments().add(g);
 			System.out.println(g);
 			a.notifyDataSetChanged();
 
 		}
-	};*/
+	};
 
 	private class SegmentListAdaptor extends ArrayAdapter<SegmentAbstract> {
 
@@ -85,7 +93,7 @@ public class SegmentList extends AScubaActivity {
 			cb.setChecked(item.getEnable());
 			
 			TextView text = (TextView) a.findViewById(R.id.segment_list_label_text);
-			text.setText(item.getTime()+"min@"+item.getDepth()+"m|sp:"+item.getSetpoint());
+			text.setText("Duration:	"+item.getTime()+" min\nDepth:		"+item.getDepth()+" m\nGas:			"+item.getGas()+"\nSetPoint:	"+item.getSetpoint());
 			return a;
 		}
 		
@@ -93,8 +101,8 @@ public class SegmentList extends AScubaActivity {
 			public void onClick(View v) {
 				
 				SegmentAbstract g = a.getItem((Integer) v.getTag());
-				//EditCallback e = new EditCallback((Integer) v.getTag()); 
-				//new GasDialog(SegmentList.this ,g, e).show();
+				EditCallback e = new EditCallback((Integer) v.getTag()); 
+				new SegmentDialog(SegmentList.this,g).show();
 			}
 		};
 		
@@ -111,17 +119,17 @@ public class SegmentList extends AScubaActivity {
 			}
 		};
 	}
-	/*private class EditCallback implements SegmentDialogCallback{
+	private class EditCallback implements SegmentDialogCallback{
 		public EditCallback(int position) {
 			this.position=position;
 		}
 		int position;
-		public void notify(Gas g) {
+		public void notify(SegmentAbstract g) {
 			a.remove(a.getItem(position));
 			a.insert(g, position);
 			
 		}
-	}*/
+	}
 	
 
 }
