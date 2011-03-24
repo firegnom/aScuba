@@ -66,13 +66,12 @@ public class SegmentList extends AScubaActivity {
 
 	private class SegmentListAdaptor extends ArrayAdapter<SegmentAbstract> {
 
-		List <SegmentAbstract> selected;
 		public SegmentListAdaptor(Context context, int resource,
 				int textViewResourceId, List<SegmentAbstract> objects) {
 			super(context, resource, textViewResourceId, objects);
-			selected = new ArrayList<SegmentAbstract>();
 			//TOTO save selected somewhere;
 		}
+	
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View a =  super.getView(position, convertView, parent);
@@ -102,7 +101,7 @@ public class SegmentList extends AScubaActivity {
 				
 				SegmentAbstract g = a.getItem((Integer) v.getTag());
 				EditCallback e = new EditCallback((Integer) v.getTag()); 
-				new SegmentDialog(SegmentList.this,g).show();
+				new SegmentDialog(SegmentList.this,g,new EditCallback((Integer) v.getTag())).show();
 			}
 		};
 		

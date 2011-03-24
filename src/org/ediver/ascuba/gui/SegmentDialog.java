@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -28,6 +29,9 @@ public class SegmentDialog extends Dialog {
 	EditText time;
 	EditText setPoint;
 	Spinner gases;
+	
+	Button ok;
+	Button cancel;
 	
 	
 	public SegmentDialog(Context context, SegmentDialogCallback callback) {
@@ -60,6 +64,11 @@ public class SegmentDialog extends Dialog {
 		time.setText(""+segment.getTime());
 		setPoint.setText(""+segment.getSetpoint());
 		gases= (Spinner) findViewById(R.id.SegmentDialogGases);
+		ok= (Button) findViewById(R.id.SegmentDialogOk);
+		cancel= (Button) findViewById(R.id.SegmentDialogCancel);
+		cancel.setOnClickListener(cancelListener);
+		ok.setOnClickListener(okListener);
+		
 		ArrayList<Gas> prefGases = Mvplan.prefs.getPrefGases();
 		ArrayList<Gas> prefGasesEnabled = new ArrayList<Gas>();
 		for (Gas gas : prefGases) {
@@ -101,6 +110,37 @@ public class SegmentDialog extends Dialog {
 		}
 		
 	}
+	android.view.View.OnClickListener cancelListener = new android.view.View.OnClickListener() {
+		public void onClick(View v) {
+			SegmentDialog.this.dismiss();
+		}
+
+	};
+	
+	android.view.View.OnClickListener okListener = new android.view.View.OnClickListener() {
+		public void onClick(View v) {
+			try {
+				double d = Double.parseDouble(depth.getText().toString());
+				segment.setDepth(d);
+				double t = Double.parseDouble(time.getText().toString());
+				segment.setTime(t);
+				double sp = Double.parseDouble(setPoint.getText().toString());
+				segment.setSetpoint(sp);
+				segment.setGas((Gas) gases.getSelectedItem());
+				
+				SegmentDialog.this.callback.notify(segment);
+				SegmentDialog.this.dismiss();
+			} catch (NumberFormatException e) {
+				// TODO display error message
+				e.printStackTrace();
+				
+				
+			}
+			
+			
+		}
+
+	};
 
 	
 	

@@ -10,21 +10,18 @@ import android.widget.TextView;
 public class ProfileView extends AScubaActivity {
 
 	TextView view;
-	private String TAG = "bbbbbb";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.profile_text_view);
 		view = (TextView) findViewById(R.id.profile_text_view_text);
-		Log.d(TAG, "Iaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaane");
 
 	}
 
 	public void calculate() {
-		Log.d(TAG, "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
 		super.onResume();
-		Mvplan.prefs.getPrefGases();
+		Mvplan.prefs.setOcDeco(true);
 
 		Profile p = new Profile(Mvplan.prefs.getPrefSegments(),
 				Mvplan.prefs.getPrefGases(), null);

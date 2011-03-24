@@ -24,7 +24,7 @@ android:layout_width="fill_parent"
 android:layout_height="fill_parent" 
 android:orientation="vertical" >
 
-<LinearLayout android:id="@+id/GasDialogppO2Layout" android:layout_width="fill_parent" android:layout_height="wrap_content">
+<LinearLayout  android:layout_width="fill_parent" android:layout_height="wrap_content">
 	<TextView 
 	 	style="@style/GasDialogResult"
 	   	android:text="Depth		: "/>
@@ -37,7 +37,7 @@ android:orientation="vertical" >
 		android:layout_width="fill_parent"></EditText>
 </LinearLayout>
 
-<LinearLayout android:id="@+id/GasDialogppO2Layout" android:layout_width="fill_parent" android:layout_height="wrap_content">
+<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
 	<TextView 
 	 	style="@style/GasDialogResult"
 	   	android:text="Time		: "/>
@@ -51,7 +51,7 @@ android:orientation="vertical" >
 		android:layout_width="match_parent"></EditText>
 </LinearLayout>
 
-<LinearLayout android:id="@+id/GasDialogppO2Layout" android:layout_width="fill_parent" android:layout_height="wrap_content">
+<LinearLayout  android:layout_width="fill_parent" android:layout_height="wrap_content">
 	<TextView 
 	 	style="@style/GasDialogResult"
 	   	android:text="SetPoint	: "/>
@@ -65,28 +65,28 @@ android:orientation="vertical" >
 	 	android:inputType="number" 
 		></EditText>
 </LinearLayout>
-<LinearLayout android:id="@+id/GasDialogppO2Layout" android:layout_width="fill_parent" android:layout_height="wrap_content">
+<LinearLayout  android:layout_width="fill_parent" android:layout_height="wrap_content">
 	<TextView 
 	 	style="@style/GasDialogResult"
 	   	android:text="Gas		: "/>
 	<Spinner android:layout_height="wrap_content" android:id="@+id/SegmentDialogGases" android:layout_width="match_parent"></Spinner>
 </LinearLayout>
 
-<LinearLayout android:id="@+id/GasDialogcontrollLayout" 
+<LinearLayout 
 	android:layout_width="fill_parent" 
 	android:layout_height="wrap_content"
 	android:layout_marginLeft="20dip"
 	android:layout_marginRight="20dip"
 	>
 		
-		<Button android:id="@+id/GasDialogCancel" 
+		<Button android:id="@+id/SegmentDialogCancel" 
 		android:text="Cancel" 
 		android:layout_gravity="right"
 		android:layout_weight="1"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"/>
 		
-	 	<Button android:id="@+id/GasDialogOk" 
+	 	<Button android:id="@+id/SegmentDialogOk" 
 		android:text="Ok" 
 		android:layout_weight="1"
 		android:layout_gravity="right"
