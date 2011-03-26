@@ -6,6 +6,8 @@ import java.util.List;
 import mvplan.gas.Gas;
 import mvplan.main.Mvplan;
 import mvplan.segments.SegmentAbstract;
+import mvplan.segments.SegmentDeco;
+import mvplan.segments.SegmentDive;
 
 import org.ediver.ascuba.R;
 
@@ -36,6 +38,7 @@ public class SegmentDialog extends Dialog {
 	
 	public SegmentDialog(Context context, SegmentDialogCallback callback) {
 		super(context);
+		segment = new SegmentDive(0, 0, null, 0);
 		this.callback = callback;
 		
 
