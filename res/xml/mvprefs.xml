@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <EditTextPreference  android:title="Last stop"
+        				android:dialogMessage="message dialog"
+                        android:summary="Depth of your last deco stop"
+                        android:key="lastStopDepth"/>
+    <ListPreference
+                        android:title="Units"
+                        android:summary="Change units between metric and imperial"
+                        android:key="units"
+                        android:defaultValue="0"
+                        android:entries="@array/units_text"
+                        android:entryValues="@array/units_id" />
+    <PreferenceCategory android:title="Gradient Factors">
+        <EditTextPreference  android:title="GF Low"
+        				android:dialogMessage="message dialog"
+        				android:defaultValue="30"
+                        android:summary="Low value of gradient factor"
+                        android:key="gfLow"/>
+        <EditTextPreference  android:title="High"
+        				android:dialogMessage="message dialog"
+        				android:defaultValue="80"
+                        android:summary="High value of gradient factor"
+                        android:key="gfHigh"/>
+        
+    </PreferenceCategory>
+    <PreferenceCategory android:title="RVM" android:summary="dddd">
+        <EditTextPreference  android:title="Dive"
+        				android:dialogMessage="message dialog"
+        				android:defaultValue="20"
+                        android:summary="Low value of gradient factor"
+                        android:key="diveRVM"/>
+        <EditTextPreference  android:title="Deco"
+        				android:dialogMessage="message dialog"
+        				android:defaultValue="16"
+                        android:summary="High value of gradient factor"
+                        android:key="decoRVM"/>
+        
+    </PreferenceCategory>
+    
+
+</PreferenceScreen>

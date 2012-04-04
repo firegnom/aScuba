@@ -30,14 +30,12 @@ public class SegmentList extends AScubaActivity {
 	Button add;
 	ListView list;
 	SegmentListAdaptor a;
-	
-	
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	protected void onStart() {
+		super.onStart();
 		setContentView(R.layout.segment_list_view);
-		
+
 		list = (ListView) findViewById(R.id.segment_list_list);
 		add = (Button) findViewById(R.id.segment_list_add);
 		add.setOnClickListener(addButtonListener);
@@ -46,7 +44,13 @@ public class SegmentList extends AScubaActivity {
 				Mvplan.prefs.getPrefSegments());
 		list.setAdapter(a);
 		
-		
+	};
+	
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
 	}
 
 	android.view.View.OnClickListener addButtonListener = new android.view.View.OnClickListener() {
@@ -69,66 +73,76 @@ public class SegmentList extends AScubaActivity {
 		public SegmentListAdaptor(Context context, int resource,
 				int textViewResourceId, List<SegmentAbstract> objects) {
 			super(context, resource, textViewResourceId, objects);
-			//TOTO save selected somewhere;
+			// TOTO save selected somewhere;
 		}
-	
+
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			View a =  super.getView(position, convertView, parent);
-			
+			View a = super.getView(position, convertView, parent);
+
 			SegmentAbstract item = getItem(position);
-			//handle buttons
-			ImageButton b = (ImageButton) a.findViewById(R.id.segment_list_label_edit);
+			// handle buttons
+			ImageButton b = (ImageButton) a
+					.findViewById(R.id.segment_list_label_edit);
 			b.setTag(new Integer(position));
 			b.setOnClickListener(editButtonListener);
 			b = (ImageButton) a.findViewById(R.id.segment_list_label_delete);
 			b.setTag(new Integer(position));
 			b.setOnClickListener(deleteButtonListener);
-			
-			//handle checkbox;
-			CheckBox cb = (CheckBox) a.findViewById(R.id.segment_list_label_check_box);
+
+			// handle checkbox;
+			CheckBox cb = (CheckBox) a
+					.findViewById(R.id.segment_list_label_check_box);
 			cb.setOnCheckedChangeListener(checkedListener);
 			cb.setTag(new Integer(position));
 			cb.setChecked(item.getEnable());
-			
-			TextView text = (TextView) a.findViewById(R.id.segment_list_label_text);
-			text.setText("Duration:	"+item.getTime()+" min\nDepth:		"+item.getDepth()+" m\nGas:			"+item.getGas()+"\nSetPoint:	"+item.getSetpoint());
+
+			TextView text = (TextView) a
+					.findViewById(R.id.segment_list_label_text);
+			text.setText("Duration:	" + item.getTime() + " min\nDepth:		"
+					+ item.getDepth() + " "
+					+ Mvplan.prefs.getDepthShortString() + "\nGas:			"
+					+ item.getGas() + "\nSetPoint:	" + item.getSetpoint());
 			return a;
 		}
-		
+
 		android.view.View.OnClickListener editButtonListener = new android.view.View.OnClickListener() {
 			public void onClick(View v) {
-				
+
 				SegmentAbstract g = a.getItem((Integer) v.getTag());
-				EditCallback e = new EditCallback((Integer) v.getTag()); 
-				new SegmentDialog(SegmentList.this,g,new EditCallback((Integer) v.getTag())).show();
+				EditCallback e = new EditCallback((Integer) v.getTag());
+				new SegmentDialog(SegmentList.this, g, new EditCallback(
+						(Integer) v.getTag())).show();
 			}
 		};
-		
+
 		android.view.View.OnClickListener deleteButtonListener = new android.view.View.OnClickListener() {
 			public void onClick(View v) {
 				a.remove(a.getItem((Integer) v.getTag()));
 			}
 		};
-		
+
 		OnCheckedChangeListener checkedListener = new OnCheckedChangeListener() {
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
 				int position = (Integer) buttonView.getTag();
 				a.getItem(position).setEnable(isChecked);
 			}
 		};
 	}
-	private class EditCallback implements SegmentDialogCallback{
+
+	private class EditCallback implements SegmentDialogCallback {
 		public EditCallback(int position) {
-			this.position=position;
+			this.position = position;
 		}
+
 		int position;
+
 		public void notify(SegmentAbstract g) {
 			a.remove(a.getItem(position));
 			a.insert(g, position);
-			
+
 		}
 	}
-	
 
 }

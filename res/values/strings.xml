@@ -21,5 +21,6 @@
 <string name="gas_dialog_n2_label">N2</string>
 <string name="gas_dialog_mod_label">MOD</string>
 <string name="gas_dialog_title">Edit gas</string>
+<string name="preferences">Preferences</string>
 
 </resources>
