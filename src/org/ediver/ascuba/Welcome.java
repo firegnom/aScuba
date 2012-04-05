@@ -22,12 +22,12 @@ public class Welcome extends AScubaActivity implements GasDialogCallback{
 		super.onCreate(savedInstanceState);
 		c = this;
 		setContentView(R.layout.welcome);
-		b =  (Button) findViewById(R.id.ButtonOpenDivelog);
+		/*b =  (Button) findViewById(R.id.ButtonOpenDivelog);
 		b.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				open(DIVELOG);
 			}
-		});
+		});*/
 		b =  (Button) findViewById(R.id.ButtonOpenPlanner);
 		
 		b.setOnClickListener(new OnClickListener() {
