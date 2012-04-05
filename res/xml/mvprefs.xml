@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
     
     <EditTextPreference  android:title="Last stop"
-        				android:dialogMessage="message dialog"
+        				android:dialogMessage="Value between 1 - 10"
                         android:summary="Depth of your last deco stop"
                         android:key="lastStopDepth"/>
     <ListPreference
@@ -14,27 +14,27 @@
                         android:entryValues="@array/units_id" />
     <PreferenceCategory android:title="Gradient Factors">
         <EditTextPreference  android:title="GF Low"
-        				android:dialogMessage="message dialog"
         				android:defaultValue="30"
+        				android:dialogMessage="Value between 0 - 95 and no greater than gf high"
                         android:summary="Low value of gradient factor"
                         android:key="gfLow"/>
         <EditTextPreference  android:title="High"
-        				android:dialogMessage="message dialog"
         				android:defaultValue="80"
+        				android:dialogMessage="Value between 0 - 95 and greater than gf low"
                         android:summary="High value of gradient factor"
                         android:key="gfHigh"/>
         
     </PreferenceCategory>
-    <PreferenceCategory android:title="RVM" android:summary="dddd">
+    <PreferenceCategory android:title="RVM" >
         <EditTextPreference  android:title="Dive"
-        				android:dialogMessage="message dialog"
         				android:defaultValue="20"
-                        android:summary="Low value of gradient factor"
+        				android:dialogMessage="Value between 0 - 100"
+                        android:summary="Respiratory Minute Volume for dive"
                         android:key="diveRVM"/>
         <EditTextPreference  android:title="Deco"
-        				android:dialogMessage="message dialog"
         				android:defaultValue="16"
-                        android:summary="High value of gradient factor"
+        				android:dialogMessage="Value between 0 - 100"
+                        android:summary="Respiratory Minute Volume for decompression"
                         android:key="decoRVM"/>
         
     </PreferenceCategory>
