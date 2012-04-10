@@ -20,7 +20,6 @@ public class ProfileView extends AScubaActivity {
 
 	public void calculate() {
 		super.onResume();
-		MvplanInstance.getPrefs().setOcDeco(true);
 
 		Profile p = new Profile(MvplanInstance.getPrefs().getPrefSegments(),
 				MvplanInstance.getPrefs().getPrefGases(), null);

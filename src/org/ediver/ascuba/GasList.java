@@ -24,15 +24,27 @@ import android.widget.ListView;
 public class GasList extends AScubaActivity {
 	Button add;
 	ListView list;
+	CheckBox ocbailout;
 	GasListAdaptor a;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.gas_list_view);
+		
+		ocbailout = (CheckBox) findViewById(R.id.oc_bailout_checkbox);
 		list = (ListView) findViewById(R.id.gas_list_list);
 		add = (Button) findViewById(R.id.gas_list_add);
 		add.setOnClickListener(addButtonListener);
+		ocbailout.setChecked(MvplanInstance.getPrefs().getOcDeco());
+		ocbailout.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				MvplanInstance.getPrefs().setOcDeco(isChecked);
+				MvplanInstance.getPrefs().validatePrefs();
+			}
+		});
+		
 		a = new GasListAdaptor(this.getApplicationContext(),
 				R.layout.gas_list_label, R.id.gas_list_label_text,
 				MvplanInstance.getPrefs().getPrefGases());
