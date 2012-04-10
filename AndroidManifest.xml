@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="org.ediver.ascuba" android:versionCode="301" android:versionName="0.3.1">
+	package="org.ediver.ascuba" android:versionCode="400" android:versionName="0.4.0">
+	<uses-sdk android:maxSdkVersion="15" android:targetSdkVersion="10" android:minSdkVersion="4"></uses-sdk>
 	<application android:icon="@drawable/icon" android:label="@string/app_name"
 		android:description="@string/app_description" android:name="AScuba">
 		<activity android:name=".Welcome" android:label="@string/app_name">
@@ -24,5 +25,5 @@
 
 	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
 	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"></uses-permission-->
-<uses-sdk android:maxSdkVersion="11" android:targetSdkVersion="9" android:minSdkVersion="4"></uses-sdk>
+
 </manifest> 
