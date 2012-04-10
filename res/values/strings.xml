@@ -33,6 +33,6 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 <string name="gas_dialog_title">Edit gas</string>
 <string name="preferences">Preferences</string>
 <string name="button_add_gas">Add</string>
-<string name="oc_bailout_checkbox_text">OC/Bailout</string>
+<string name="oc_bailout_checkbox_text">Gas switch/Bailout</string>
 
 </resources>
