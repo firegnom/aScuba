@@ -1,13 +1,10 @@
 package org.ediver.ascuba;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import mvplan.main.Mvplan;
+import mvplan.main.MvplanInstance;
 import mvplan.segments.SegmentAbstract;
-import mvplan.segments.SegmentDeco;
 
-import org.ediver.ascuba.gui.GasDialog;
 import org.ediver.ascuba.gui.SegmentDialog;
 import org.ediver.ascuba.gui.SegmentDialogCallback;
 
@@ -19,11 +16,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 public class SegmentList extends AScubaActivity {
@@ -41,7 +36,7 @@ public class SegmentList extends AScubaActivity {
 		add.setOnClickListener(addButtonListener);
 		a = new SegmentListAdaptor(this.getApplicationContext(),
 				R.layout.segment_list_label, R.id.segment_list_label_text,
-				Mvplan.prefs.getPrefSegments());
+				MvplanInstance.getPrefs().getPrefSegments());
 		list.setAdapter(a);
 		
 	};
@@ -61,7 +56,7 @@ public class SegmentList extends AScubaActivity {
 
 	SegmentDialogCallback addCallback = new SegmentDialogCallback() {
 		public void notify(SegmentAbstract g) {
-			Mvplan.prefs.getPrefSegments().add(g);
+			MvplanInstance.getPrefs().getPrefSegments().add(g);
 			System.out.println(g);
 			a.notifyDataSetChanged();
 
@@ -101,7 +96,7 @@ public class SegmentList extends AScubaActivity {
 					.findViewById(R.id.segment_list_label_text);
 			text.setText("Duration:	" + item.getTime() + " min\nDepth:		"
 					+ item.getDepth() + " "
-					+ Mvplan.prefs.getDepthShortString() + "\nGas:			"
+					+ MvplanInstance.getPrefs().getDepthShortString() + "\nGas:			"
 					+ item.getGas() + "\nSetPoint:	" + item.getSetpoint());
 			return a;
 		}

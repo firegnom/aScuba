@@ -1,10 +1,9 @@
 package org.ediver.ascuba;
 
 import mvplan.dive.Profile;
-import mvplan.gui.android.ProfilePrinter;
-import mvplan.main.Mvplan;
+import mvplan.dive.printer.TextProfilePrinter;
+import mvplan.main.MvplanInstance;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 public class ProfileView extends AScubaActivity {
@@ -21,10 +20,10 @@ public class ProfileView extends AScubaActivity {
 
 	public void calculate() {
 		super.onResume();
-		Mvplan.prefs.setOcDeco(true);
+		MvplanInstance.getPrefs().setOcDeco(true);
 
-		Profile p = new Profile(Mvplan.prefs.getPrefSegments(),
-				Mvplan.prefs.getPrefGases(), null);
+		Profile p = new Profile(MvplanInstance.getPrefs().getPrefSegments(),
+				MvplanInstance.getPrefs().getPrefGases(), null);
 		// m.printModel();
 		int returnCode = p.doDive();
 		Profile currentProfile;
@@ -36,25 +35,25 @@ public class ProfileView extends AScubaActivity {
 			// Model currentModel = p.getModel();
 			// System.out.println("Dive Metadata:"+currentModel.getMetaData());
 			StringBuffer b = new StringBuffer();
-			new ProfilePrinter(currentProfile, b).doPrintTable();
+			new TextProfilePrinter(currentProfile, b).print();
 
 			view.setText(b);
 			break;
 
 		case Profile.CEILING_VIOLATION:
-			view.setText(Mvplan
+			view.setText(MvplanInstance.getMvplan()
 					.getResource("mvplan.gui.MainFrame.ceilingViolation.text"));
 			break;
 
 		case Profile.NOTHING_TO_PROCESS:
-			view.setText(Mvplan
+			view.setText(MvplanInstance.getMvplan()
 					.getResource("mvplan.gui.MainFrame.noSegments.text"));
 			break;
 		case Profile.PROCESSING_ERROR:
-			view.setText(Mvplan
+			view.setText(MvplanInstance.getMvplan()
 					.getResource("mvplan.gui.MainFrame.processingError.text"));
 		case Profile.INFINITE_DECO:
-			view.setText(Mvplan
+			view.setText(MvplanInstance.getMvplan()
 					.getResource("mvplan.gui.MainFrame.decoNotPossible.text"));
 
 		default:

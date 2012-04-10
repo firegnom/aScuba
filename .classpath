@@ -4,7 +4,7 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry exported="true" kind="lib" path="/mvplan/target/mvplan-0.0.1-SNAPSHOT.jar" sourcepath="/mvplan/src/main/java"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/mvplan"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mvplan_core"/>
+	<classpathentry kind="lib" path="/mvplan_core/target/mvplan_core-1.6-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

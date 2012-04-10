@@ -2,8 +2,10 @@ package org.ediver.ascuba;
 
 import java.util.ResourceBundle;
 
-import mvplan.main.Mvplan;
+import mvplan.main.IMvplan;
+import mvplan.main.MvplanInstance;
 import mvplan.prefs.Prefs;
+import mvplan.util.Version;
 
 import org.ediver.ascuba.db.DBManager;
 
@@ -12,16 +14,18 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-public class AScuba extends Application {
+public class AScuba extends Application implements IMvplan{
 	public DBManager DAO = null;
 	public static final String TAG = "org.ediver.ascuba";
+	private Prefs prefs;
+	private ResourceBundle bundle;
 	@Override
 	public void onCreate() {
-		Mvplan mv = new Mvplan();
-		Prefs prefs = new Prefs();
-		Mvplan.stringResource = ResourceBundle.getBundle("mvplan/resources/strings");
-		Mvplan.prefs = prefs;
-		Mvplan.prefs.setDefaultPrefs();
+		MvplanInstance.setMvplan(this);
+		prefs = new Prefs();
+		bundle = ResourceBundle.getBundle("mvplan/resources/strings");
+		prefs.setDefaultPrefs();
+		
 		//Mvplan.prefs.setUnitsTo(Prefs.IMPERIAL);
 		super.onCreate();
 		try {
@@ -44,6 +48,23 @@ public class AScuba extends Application {
 	private void test(){
 		SQLiteDatabase database = DAO.getDatabase();
 		
+		
+	}
+	public String getResource(String res) {
+		
+		return bundle.getString(res);
+	}
+	public String getAppName() {
+		return MvplanInstance.NAME+ " " + MvplanInstance.getVersion().toString();
+	}
+	public Prefs getPrefs() {
+		return prefs;
+	}
+	public int getDebug() {
+		return 0;
+	}
+	public void init() {
+		// TODO Auto-generated method stub
 		
 	}
 	

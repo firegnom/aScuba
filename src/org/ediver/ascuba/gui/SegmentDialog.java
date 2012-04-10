@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mvplan.gas.Gas;
-import mvplan.main.Mvplan;
+import mvplan.main.MvplanInstance;
 import mvplan.segments.SegmentAbstract;
-import mvplan.segments.SegmentDeco;
 import mvplan.segments.SegmentDive;
 
 import org.ediver.ascuba.R;
@@ -72,7 +71,7 @@ public class SegmentDialog extends Dialog {
 		cancel.setOnClickListener(cancelListener);
 		ok.setOnClickListener(okListener);
 		
-		ArrayList<Gas> prefGases = Mvplan.prefs.getPrefGases();
+		ArrayList<Gas> prefGases = MvplanInstance.getPrefs().getPrefGases();
 		ArrayList<Gas> prefGasesEnabled = new ArrayList<Gas>();
 		for (Gas gas : prefGases) {
 			if (gas.getEnable()){

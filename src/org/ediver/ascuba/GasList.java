@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mvplan.gas.Gas;
-import mvplan.main.Mvplan;
+import mvplan.main.MvplanInstance;
 
 import org.ediver.ascuba.gui.GasDialog;
 import org.ediver.ascuba.gui.GasDialogCallback;
@@ -35,7 +35,7 @@ public class GasList extends AScubaActivity {
 		add.setOnClickListener(addButtonListener);
 		a = new GasListAdaptor(this.getApplicationContext(),
 				R.layout.gas_list_label, R.id.gas_list_label_text,
-				Mvplan.prefs.getPrefGases());
+				MvplanInstance.getPrefs().getPrefGases());
 		list.setAdapter(a);
 		
 	}
@@ -48,7 +48,7 @@ public class GasList extends AScubaActivity {
 
 	GasDialogCallback addCallback = new GasDialogCallback() {
 		public void notify(Gas g) {
-			Mvplan.prefs.getPrefGases().add(g);
+			MvplanInstance.getPrefs().getPrefGases().add(g);
 			System.out.println(g);
 			a.notifyDataSetChanged();
 

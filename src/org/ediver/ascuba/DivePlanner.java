@@ -1,10 +1,10 @@
 package org.ediver.ascuba;
 
-import mvplan.main.Mvplan;
+import mvplan.main.MvplanInstance;
+import mvplan.prefs.Prefs;
 
 import org.ediver.ascuba.gui.MVPlanPreferences;
 
-import android.app.Activity;
 import android.app.ActivityGroup;
 import android.app.LocalActivityManager;
 import android.content.Intent;
@@ -122,21 +122,22 @@ public class DivePlanner extends ActivityGroup {
 		double lastStopDepth;
 		try {
 			lastStopDepth = Double.parseDouble(prefs.getString("lastStopDepth",
-					"" + Mvplan.prefs.getLastStopDepth()));
+					"" + MvplanInstance.getPrefs().getLastStopDepth()));
 		} catch (NumberFormatException e) {
-			lastStopDepth = Mvplan.prefs.getLastStopDepth();
+			lastStopDepth = MvplanInstance.getPrefs().getLastStopDepth();
 
 			SharedPreferences.Editor editor = prefs.edit();
 			editor.putString("lastStopDepth", "" + lastStopDepth);
 			editor.commit();
 		}
-		Mvplan.prefs.setLastStopDepth(lastStopDepth);
-		Mvplan.prefs.setUnitsTo(Integer.parseInt(prefs.getString("units", ""+Mvplan.prefs.METRIC)));
-		Mvplan.prefs.setGfLow(Double.parseDouble(prefs.getString("gfLow", ""+Mvplan.prefs.getGfLow()))/100.0);
-		Mvplan.prefs.setGfHigh(Double.parseDouble(prefs.getString("gfHigh", ""+Mvplan.prefs.getGfHigh()))/100.0);
-		Mvplan.prefs.setGfHigh(Double.parseDouble(prefs.getString("diveRVM", ""+Mvplan.prefs.getGfHigh())));
-		Mvplan.prefs.setGfHigh(Double.parseDouble(prefs.getString("decoRVM", ""+Mvplan.prefs.getGfHigh())));
-		Mvplan.prefs.validatePrefs();
+		MvplanInstance.getPrefs().setLastStopDepth(lastStopDepth);
+		MvplanInstance.getPrefs();
+		MvplanInstance.getPrefs().setUnitsTo(Integer.parseInt(prefs.getString("units", ""+Prefs.METRIC)));
+		MvplanInstance.getPrefs().setGfLow(Double.parseDouble(prefs.getString("gfLow", ""+MvplanInstance.getPrefs().getGfLow()))/100.0);
+		MvplanInstance.getPrefs().setGfHigh(Double.parseDouble(prefs.getString("gfHigh", ""+MvplanInstance.getPrefs().getGfHigh()))/100.0);
+		MvplanInstance.getPrefs().setGfHigh(Double.parseDouble(prefs.getString("diveRVM", ""+MvplanInstance.getPrefs().getGfHigh())));
+		MvplanInstance.getPrefs().setGfHigh(Double.parseDouble(prefs.getString("decoRVM", ""+MvplanInstance.getPrefs().getGfHigh())));
+		MvplanInstance.getPrefs().validatePrefs();
 
 	}
 
