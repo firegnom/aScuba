@@ -60,6 +60,10 @@ public class AScuba extends Application implements IMvplan{
 	public Prefs getPrefs() {
 		return prefs;
 	}
+	public void setPrefs(Prefs p) {
+		prefs=p;
+		
+	}
 	public int getDebug() {
 		return 0;
 	}
@@ -67,5 +71,6 @@ public class AScuba extends Application implements IMvplan{
 		// TODO Auto-generated method stub
 		
 	}
+	
 	
 }

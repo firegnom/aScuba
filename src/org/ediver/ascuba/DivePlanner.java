@@ -2,8 +2,10 @@ package org.ediver.ascuba;
 
 import mvplan.main.MvplanInstance;
 import mvplan.prefs.Prefs;
+import mvplan.prefs.PrefsException;
 
 import org.ediver.ascuba.gui.MVPlanPreferences;
+import org.ediver.ascuba.mvplan.SharedPreferencesDAO;
 
 import android.app.ActivityGroup;
 import android.app.LocalActivityManager;
@@ -119,25 +121,14 @@ public class DivePlanner extends ActivityGroup {
 		// Get the xml/preferences.xml preferences
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(getBaseContext());
-		double lastStopDepth;
+		SharedPreferencesDAO dao = new SharedPreferencesDAO (prefs);
 		try {
-			lastStopDepth = Double.parseDouble(prefs.getString("lastStopDepth",
-					"" + MvplanInstance.getPrefs().getLastStopDepth()));
-		} catch (NumberFormatException e) {
-			lastStopDepth = MvplanInstance.getPrefs().getLastStopDepth();
-
-			SharedPreferences.Editor editor = prefs.edit();
-			editor.putString("lastStopDepth", "" + lastStopDepth);
-			editor.commit();
+			dao.getPrefs();
+			
+		} catch (PrefsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		MvplanInstance.getPrefs().setLastStopDepth(lastStopDepth);
-		MvplanInstance.getPrefs();
-		MvplanInstance.getPrefs().setUnitsTo(Integer.parseInt(prefs.getString("units", ""+Prefs.METRIC)));
-		MvplanInstance.getPrefs().setGfLow(Double.parseDouble(prefs.getString("gfLow", ""+MvplanInstance.getPrefs().getGfLow()))/100.0);
-		MvplanInstance.getPrefs().setGfHigh(Double.parseDouble(prefs.getString("gfHigh", ""+MvplanInstance.getPrefs().getGfHigh()))/100.0);
-		MvplanInstance.getPrefs().setGfHigh(Double.parseDouble(prefs.getString("diveRVM", ""+MvplanInstance.getPrefs().getGfHigh())));
-		MvplanInstance.getPrefs().setGfHigh(Double.parseDouble(prefs.getString("decoRVM", ""+MvplanInstance.getPrefs().getGfHigh())));
-		MvplanInstance.getPrefs().validatePrefs();
 
 	}
 
