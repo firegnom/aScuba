@@ -123,7 +123,7 @@ public class DivePlanner extends ActivityGroup {
 				.getDefaultSharedPreferences(getBaseContext());
 		SharedPreferencesDAO dao = new SharedPreferencesDAO (prefs);
 		try {
-			dao.getPrefs();
+			Prefs loadPrefs = dao.loadPrefs();
 			
 		} catch (PrefsException e) {
 			// TODO Auto-generated catch block

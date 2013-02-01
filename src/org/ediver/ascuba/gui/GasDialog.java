@@ -3,6 +3,7 @@ package org.ediver.ascuba.gui;
 import java.text.NumberFormat;
 
 import mvplan.gas.Gas;
+import mvplan.util.GasUtils;
 
 import org.ediver.ascuba.R;
 
@@ -54,7 +55,7 @@ public class GasDialog extends Dialog {
 		super(context);
 		this.callback = callback;
 		ppo2 = 1.4;
-		gas = new Gas(0.0, 0.32, Gas.getMod(0.32, ppo2));
+		gas = new Gas(0.0, 0.32, GasUtils.getMod(0.32, ppo2));
 
 	}
 
@@ -62,12 +63,12 @@ public class GasDialog extends Dialog {
 		super(context);
 		this.callback = callback;
 		this.gas = (Gas) gas.clone();
-		ppo2 = Gas.getppO2(gas.getFO2(), gas.getMod());
+		ppo2 = GasUtils.getppO2(gas.getFO2(), gas.getMod());
 	}
 	public GasDialog(Context context, Gas gas) {
 		super(context);
 		this.gas = gas;
-		ppo2 = Gas.getppO2(gas.getFO2(), gas.getMod());
+		ppo2 = GasUtils.getppO2(gas.getFO2(), gas.getMod());
 	}
 
 	@Override
@@ -262,7 +263,7 @@ public class GasDialog extends Dialog {
 			}
 			gas.setFO2(fo2);
 			gas.setFHe(fhe2);
-			gas.setMod(Gas.getMod(gas.getFO2(), ppo2));
+			gas.setMod(GasUtils.getMod(gas.getFO2(), ppo2));
 			
 			redrawGas();
 		}
@@ -276,7 +277,7 @@ public class GasDialog extends Dialog {
 			}
 			gas.setFHe(fhe2);
 			gas.setFO2(fo2);
-			gas.setMod(Gas.getMod(gas.getFO2(), ppo2));
+			gas.setMod(GasUtils.getMod(gas.getFO2(), ppo2));
 
 			redrawGas();
 		}
@@ -286,7 +287,7 @@ public class GasDialog extends Dialog {
 			a = (a+5)/10;
 			double _ppo2 = a / 10.0;
 			ppo2 = _ppo2 ;
-			gas.setMod(Gas.getMod(gas.getFO2(), _ppo2));
+			gas.setMod(GasUtils.getMod(gas.getFO2(), _ppo2));
 			redrawGas();
 		}
 	}

@@ -16,12 +16,12 @@ public class SharedPreferencesDAO implements PrefsDAO{
 		this.prefs = prefs;
 	}
 
-	public void setPrefs(Prefs p) throws PrefsException {
+	public void savePrefs(Prefs p) throws PrefsException {
 	
 		
 	}
 
-	public Prefs getPrefs() throws PrefsException {
+	public Prefs loadPrefs() throws PrefsException {
 		
 		Prefs mvPrefs = MvplanInstance.getPrefs();
 		
