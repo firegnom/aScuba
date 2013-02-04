@@ -1,11 +1,10 @@
 package org.ediver.ascuba;
 
-import mvplan.main.MvplanInstance;
 import mvplan.prefs.Prefs;
 import mvplan.prefs.PrefsException;
 
 import org.ediver.ascuba.gui.MVPlanPreferences;
-import org.ediver.ascuba.mvplan.SharedPreferencesDAO;
+import org.ediver.ascuba.preferences.SharedPreferencesDAO;
 
 import android.app.ActivityGroup;
 import android.app.LocalActivityManager;
@@ -118,6 +117,7 @@ public class DivePlanner extends ActivityGroup {
 	};
 
 	private void getPrefs() {
+		
 		// Get the xml/preferences.xml preferences
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(getBaseContext());

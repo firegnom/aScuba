@@ -72,8 +72,8 @@ public class SegmentDialog extends Dialog {
 		cancel.setOnClickListener(cancelListener);
 		ok.setOnClickListener(okListener);
 
-		ArrayList<Gas> prefGases = MvplanInstance.getPrefs().getPrefGases();
-		ArrayList<Gas> prefGasesEnabled = new ArrayList<Gas>();
+		List<Gas> prefGases = MvplanInstance.getPrefs().getPrefGases();
+		List<Gas> prefGasesEnabled = new ArrayList<Gas>();
 		for (Gas gas : prefGases) {
 			if (gas.getEnable()) {
 				prefGasesEnabled.add(gas);

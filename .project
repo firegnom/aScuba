@@ -3,7 +3,7 @@
 	<name>aScuba</name>
 	<comment></comment>
 	<projects>
-		<project>mvplan</project>
+		<project>mvplan_core</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

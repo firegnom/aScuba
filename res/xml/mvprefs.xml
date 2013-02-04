@@ -1,43 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"  >
+
+    <EditTextPreference
+        android:dialogMessage="Value between 1 - 10"
+        android:key="ascuba.preferences.lastStopDepth"
+        android:summary="Depth of your last deco stop"
+        android:title="Last stop" />
     
-    <EditTextPreference  android:title="Last stop"
-        				android:dialogMessage="Value between 1 - 10"
-                        android:summary="Depth of your last deco stop"
-                        android:key="lastStopDepth"/>
     <ListPreference
-                        android:title="Units"
-                        android:summary="Change units between metric and imperial"
-                        android:key="units"
-                        android:defaultValue="0"
-                        android:entries="@array/units_text"
-                        android:entryValues="@array/units_id" />
-    <PreferenceCategory android:title="Gradient Factors">
-        <EditTextPreference  android:title="GF Low"
-        				android:defaultValue="30"
-        				android:dialogMessage="Value between 0 - 95 and no greater than gf high"
-                        android:summary="Low value of gradient factor"
-                        android:key="gfLow"/>
-        <EditTextPreference  android:title="High"
-        				android:defaultValue="80"
-        				android:dialogMessage="Value between 0 - 95 and greater than gf low"
-                        android:summary="High value of gradient factor"
-                        android:key="gfHigh"/>
-        
+        android:entries="@array/units_text"
+        android:entryValues="@array/units_id"
+        android:key="ascuba.preferences.units"
+        android:summary="Change units between metric and imperial"
+        android:title="Units" />
+    <PreferenceCategory android:title="Gradient Factors" >
+        <EditTextPreference
+            android:defaultValue="30"
+            android:dialogMessage="Value between 0 - 95 and no greater than gf high"
+            android:key="ascuba.preferences.GFLow"
+            android:summary="Low value of gradient factor"
+            android:title="GF Low" />
+        <EditTextPreference
+            android:defaultValue="80"
+            android:dialogMessage="Value between 0 - 95 and greater than gf low"
+            android:key="ascuba.preferences.GFHigh"
+            android:summary="High value of gradient factor"
+            android:title="High" />
     </PreferenceCategory>
     <PreferenceCategory android:title="RVM" >
-        <EditTextPreference  android:title="Dive"
-        				android:defaultValue="20"
-        				android:dialogMessage="Value between 0 - 100"
-                        android:summary="Respiratory Minute Volume for dive"
-                        android:key="diveRVM"/>
-        <EditTextPreference  android:title="Deco"
-        				android:defaultValue="16"
-        				android:dialogMessage="Value between 0 - 100"
-                        android:summary="Respiratory Minute Volume for decompression"
-                        android:key="decoRVM"/>
-        
+        <EditTextPreference
+            android:dialogMessage="Value between 0 - 100"
+            android:key="ascuba.preferences.diveRVM"
+            android:summary="Respiratory Minute Volume for dive"
+            android:title="Dive" />
+        <EditTextPreference
+            android:dialogMessage="Value between 0 - 100"
+            android:key="ascuba.preferences.decoRVM"
+            android:summary="Respiratory Minute Volume for decompression"
+            android:title="Deco" />
     </PreferenceCategory>
-    
+    <PreferenceCategory android:title="Constraints" >
+        <EditTextPreference
+            android:key="ascuba.preferences.descentRate"
+            android:title="Descent rate" />
+        <EditTextPreference
+            android:key="ascuba.preferences.ascentRate"
+            android:title="Ascent Rate" />
+        <EditTextPreference
+            android:key="ascuba.preferences.altitude"
+            android:title="Altitude" />
+        <ListPreference
+            android:entries="@array/model_text"
+            android:entryValues="@array/model_value"
+            android:key="ascuba.preferences.decoModel"
+            android:summary="Choose your model"
+            android:title="Decompression Model" />
+        <CheckBoxPreference
+            android:key="multilevel"
+            android:summaryOff="SquareDive"
+            android:summaryOn="MultiLevel"
+            android:title="Multi level" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="GUI preferences" >
+        <ListPreference
+            android:entries="@array/displayType"
+            android:entryValues="@array/displayTypeValue"
+            android:key="ascuba.preferences.outputStyle"
+            android:summary="Choose display mode"
+            android:title="Display mode" />
+    </PreferenceCategory>
 
 </PreferenceScreen>

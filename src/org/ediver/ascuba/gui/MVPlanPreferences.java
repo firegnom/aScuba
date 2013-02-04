@@ -20,14 +20,14 @@ public class MVPlanPreferences extends PreferenceActivity {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.mvprefs);
 		
-		makeDecimal("lastStopDepth");
+		/*makeDecimal("lastStopDepth");
 		makeNumber("gfHigh");
 		makeNumber("gfLow");
 		makeDecimal("diveRVM");
-		makeDecimal("decoRVM");
+		makeDecimal("decoRVM");*/
 		
 		// Get the custom preference
-		Preference customPref = (Preference) findPreference("lastStopDepth");
+		/*Preference customPref = (Preference) findPreference("lastStopDepth");
 		customPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 			public boolean onPreferenceChange(Preference preference,
 					Object newValue) {
@@ -50,7 +50,7 @@ public class MVPlanPreferences extends PreferenceActivity {
 					}
 
 
-				});
+				});*/
 	}
 	
 	private void makeDecimal(String key){
