@@ -13,6 +13,7 @@ import org.ediver.ascuba.preferences.migrations.Migration;
 import org.ediver.ascuba.preferences.serialization.PrefsSerialization;
 
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 
 public class SharedPreferencesDAO implements PrefsDAO{
 	
@@ -22,10 +23,14 @@ public class SharedPreferencesDAO implements PrefsDAO{
 	 *  preferenceces between versions . */
 	public static final int PREFS_VERSION = 1;
 	
-	public static final String PREFS_ID_VERSION = "ascuba.preferences.version";
-	public static final String PREFS_ID_LAST_STOP_DEPTH = "ascuba.preferences.lastStopDepth";
+	//not visible 
 	public static final String PREFS_ID_PREF_GASES = "ascuba.preferences.prefGases";
 	public static final String PREFS_ID_PREF_SEGMENTS = "ascuba.preferences.prefSegments";
+	
+	
+	public static final String PREFS_ID_SHOW_LATER = "ascuba.preferences.showLater";
+	public static final String PREFS_ID_LAST_STOP_DEPTH = "ascuba.preferences.lastStopDepth";
+	public static final String PREFS_ID_VERSION = "ascuba.preferences.version";
 	public static final String PREFS_ID_UNITS = "ascuba.preferences.units";
 	public static final String PREFS_ID_GF_LOW = "ascuba.preferences.GFLow";
 	public static final String PREFS_ID_GF_HIGH = "ascuba.preferences.GFHigh";
@@ -70,8 +75,7 @@ public class SharedPreferencesDAO implements PrefsDAO{
 		editor.putString(SharedPreferencesDAO.PREFS_ID_ASCENT_RATE, ""+ mvPrefs.getAscentRate());
 		editor.putString(SharedPreferencesDAO.PREFS_ID_DESCENT_RATE, ""+ mvPrefs.getDescentRate());
 		editor.putString(SharedPreferencesDAO.PREFS_ID_ALTITUDE, ""+ mvPrefs.getAltitude());
-		
-		editor.putString(SharedPreferencesDAO.PREFS_ID_MULTILEVEL, ""+mvPrefs.getGfMultilevelMode());
+		editor.putBoolean(SharedPreferencesDAO.PREFS_ID_MULTILEVEL, mvPrefs.getGfMultilevelMode());
 		editor.putString(SharedPreferencesDAO.PREFS_ID_OUTPUT_STYLE, ""+mvPrefs.getOutputStyle());
 		
 		editor.commit();
@@ -103,7 +107,7 @@ public class SharedPreferencesDAO implements PrefsDAO{
 		mvPrefs.setAltitude(Double.parseDouble(prefs.getString(PREFS_ID_ALTITUDE,""+ mvPrefs.getAltitude())));
 		
 		mvPrefs.setModelClassName(prefs.getString(PREFS_ID_DECO_MODEL,mvPrefs.getModelClassName()));
-		mvPrefs.setGfMultilevelMode(Boolean.parseBoolean(prefs.getString(PREFS_ID_MULTILEVEL,""+ mvPrefs.getGfMultilevelMode())));
+		mvPrefs.setGfMultilevelMode(prefs.getBoolean(PREFS_ID_MULTILEVEL,mvPrefs.getGfMultilevelMode()));
 		mvPrefs.setOutputStyle(Integer.parseInt(prefs.getString(PREFS_ID_OUTPUT_STYLE, ""+mvPrefs.getOutputStyle())));
 
 		mvPrefs.validatePrefs();
@@ -150,6 +154,15 @@ public class SharedPreferencesDAO implements PrefsDAO{
 			
 		}
 		
+	}
+
+	public boolean getShowLater() {
+		return prefs.getBoolean(SharedPreferencesDAO.PREFS_ID_SHOW_LATER, true);
+	}
+	public void setShowLater(boolean value) {
+		Editor edit = prefs.edit();
+		edit.putBoolean(SharedPreferencesDAO.PREFS_ID_SHOW_LATER, value);
+		edit.commit();
 	}
 	
 	

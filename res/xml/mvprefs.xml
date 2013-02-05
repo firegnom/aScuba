@@ -1,41 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"  >
-
     <EditTextPreference
-        android:dialogMessage="Value between 1 - 10"
         android:key="ascuba.preferences.lastStopDepth"
+        android:dialogMessage="Value between 1 - 10"
         android:summary="Depth of your last deco stop"
         android:title="Last stop" />
-    
     <ListPreference
+        android:key="ascuba.preferences.units"
         android:entries="@array/units_text"
         android:entryValues="@array/units_id"
-        android:key="ascuba.preferences.units"
         android:summary="Change units between metric and imperial"
         android:title="Units" />
     <PreferenceCategory android:title="Gradient Factors" >
         <EditTextPreference
+            android:key="ascuba.preferences.GFLow"
             android:defaultValue="30"
             android:dialogMessage="Value between 0 - 95 and no greater than gf high"
-            android:key="ascuba.preferences.GFLow"
             android:summary="Low value of gradient factor"
             android:title="GF Low" />
         <EditTextPreference
+            android:key="ascuba.preferences.GFHigh"
             android:defaultValue="80"
             android:dialogMessage="Value between 0 - 95 and greater than gf low"
-            android:key="ascuba.preferences.GFHigh"
             android:summary="High value of gradient factor"
             android:title="High" />
     </PreferenceCategory>
     <PreferenceCategory android:title="RVM" >
         <EditTextPreference
-            android:dialogMessage="Value between 0 - 100"
             android:key="ascuba.preferences.diveRVM"
+            android:dialogMessage="Value between 0 - 100"
             android:summary="Respiratory Minute Volume for dive"
             android:title="Dive" />
         <EditTextPreference
-            android:dialogMessage="Value between 0 - 100"
             android:key="ascuba.preferences.decoRVM"
+            android:dialogMessage="Value between 0 - 100"
             android:summary="Respiratory Minute Volume for decompression"
             android:title="Deco" />
     </PreferenceCategory>
@@ -50,13 +48,13 @@
             android:key="ascuba.preferences.altitude"
             android:title="Altitude" />
         <ListPreference
+            android:key="ascuba.preferences.decoModel"
             android:entries="@array/model_text"
             android:entryValues="@array/model_value"
-            android:key="ascuba.preferences.decoModel"
             android:summary="Choose your model"
             android:title="Decompression Model" />
         <CheckBoxPreference
-            android:key="multilevel"
+            android:key="ascuba.preferences.multilevel"
             android:summaryOff="SquareDive"
             android:summaryOn="MultiLevel"
             android:title="Multi level" />
@@ -68,6 +66,10 @@
             android:key="ascuba.preferences.outputStyle"
             android:summary="Choose display mode"
             android:title="Display mode" />
+		<CheckBoxPreference
+            android:key="ascuba.preferences.showLater"
+            android:summaryOff="Welcome screen not visible"
+            android:summaryOn="Welcome screen visible"
+            android:title="Show welcome screen" />
     </PreferenceCategory>
-
 </PreferenceScreen>

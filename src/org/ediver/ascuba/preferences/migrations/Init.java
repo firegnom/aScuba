@@ -40,7 +40,7 @@ public class Init implements Migration {
 		editor.putString(SharedPreferencesDAO.PREFS_ID_DESCENT_RATE, ""+ mvPrefs.getDescentRate());
 		editor.putString(SharedPreferencesDAO.PREFS_ID_ALTITUDE, ""+ mvPrefs.getAltitude());
 		
-		editor.putString(SharedPreferencesDAO.PREFS_ID_MULTILEVEL, ""+mvPrefs.getGfMultilevelMode());
+		editor.putBoolean(SharedPreferencesDAO.PREFS_ID_MULTILEVEL, mvPrefs.getGfMultilevelMode());
 		editor.putString(SharedPreferencesDAO.PREFS_ID_OUTPUT_STYLE, ""+mvPrefs.getOutputStyle());
 		
 		editor.commit();
