@@ -1,5 +1,6 @@
 package org.ediver.ascuba;
 
+import mvplan.main.MvplanInstance;
 import mvplan.prefs.Prefs;
 import mvplan.prefs.PrefsException;
 
@@ -31,6 +32,7 @@ public class DivePlanner extends ActivityGroup {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		getPrefs();
 		setContentView(R.layout.dive_planner_view);
 		view = (LinearLayout) findViewById(R.id.testme);
 		LocalActivityManager localActivityManager = getLocalActivityManager();
@@ -110,11 +112,19 @@ public class DivePlanner extends ActivityGroup {
 					LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
 		}
 	};
-
-	protected void onStart() {
-		super.onStart();
-		getPrefs();
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		savePrefs();
+		
 	};
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		getPrefs();
+	}
 
 	private void getPrefs() {
 		
@@ -124,6 +134,23 @@ public class DivePlanner extends ActivityGroup {
 		SharedPreferencesDAO dao = new SharedPreferencesDAO (prefs);
 		try {
 			Prefs loadPrefs = dao.loadPrefs();
+			
+		} catch (PrefsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	private void savePrefs() {
+		
+		// Get the xml/preferences.xml preferences
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(getBaseContext());
+		SharedPreferencesDAO dao = new SharedPreferencesDAO (prefs);
+		try {
+			Prefs mvPrefs = MvplanInstance.getPrefs();
+			dao.savePrefs(mvPrefs);
 			
 		} catch (PrefsException e) {
 			// TODO Auto-generated catch block

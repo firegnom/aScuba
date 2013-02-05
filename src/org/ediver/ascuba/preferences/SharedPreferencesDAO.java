@@ -54,8 +54,27 @@ public class SharedPreferencesDAO implements PrefsDAO{
 		this.prefs = prefs;
 	}
 
-	public void savePrefs(Prefs p) throws PrefsException {
+	public void savePrefs(Prefs mvPrefs) throws PrefsException {
+		PrefsSerialization s = new PrefsSerialization(mvPrefs);
 		
+		SharedPreferences.Editor editor = prefs.edit();
+		editor.putString(SharedPreferencesDAO.PREFS_ID_VERSION, ""+PREFS_VERSION);
+		editor.putString(SharedPreferencesDAO.PREFS_ID_LAST_STOP_DEPTH, ""+ mvPrefs.getLastStopDepth());
+		editor.putString(SharedPreferencesDAO.PREFS_ID_PREF_GASES, s.serializeGases());
+		editor.putString(SharedPreferencesDAO.PREFS_ID_PREF_SEGMENTS,  s.serializeSegments());
+		editor.putString(SharedPreferencesDAO.PREFS_ID_UNITS, ""+mvPrefs.getUnits());
+		editor.putString(SharedPreferencesDAO.PREFS_ID_GF_LOW,  ""+(int)((mvPrefs.getGfLow()*100)));
+		editor.putString(SharedPreferencesDAO.PREFS_ID_GF_HIGH, ""+(int)((mvPrefs.getGfHigh()*100)));
+		editor.putString(SharedPreferencesDAO.PREFS_ID_DIVE_RVM, ""+ mvPrefs.getDiveRMV());
+		editor.putString(SharedPreferencesDAO.PREFS_ID_DECO_RVM, ""+ mvPrefs.getDiveRMV());
+		editor.putString(SharedPreferencesDAO.PREFS_ID_ASCENT_RATE, ""+ mvPrefs.getAscentRate());
+		editor.putString(SharedPreferencesDAO.PREFS_ID_DESCENT_RATE, ""+ mvPrefs.getDescentRate());
+		editor.putString(SharedPreferencesDAO.PREFS_ID_ALTITUDE, ""+ mvPrefs.getAltitude());
+		
+		editor.putString(SharedPreferencesDAO.PREFS_ID_MULTILEVEL, ""+mvPrefs.getGfMultilevelMode());
+		editor.putString(SharedPreferencesDAO.PREFS_ID_OUTPUT_STYLE, ""+mvPrefs.getOutputStyle());
+		
+		editor.commit();
 		
 	}
 
@@ -74,8 +93,8 @@ public class SharedPreferencesDAO implements PrefsDAO{
 		mvPrefs.setLastStopDepth(Double.parseDouble(prefs.getString(PREFS_ID_LAST_STOP_DEPTH, ""+ mvPrefs.getLastStopDepth())));
 		mvPrefs.setUnitsTo(Integer.parseInt(prefs.getString(PREFS_ID_UNITS,""+ mvPrefs.getUnits())));
 
-		mvPrefs.setGfLow(Integer.parseInt(prefs.getString(PREFS_ID_GF_LOW, ""+ (int)((mvPrefs.getGfLow()*100))/100.0)));
-		mvPrefs.setGfHigh(Integer.parseInt(prefs.getString(PREFS_ID_GF_HIGH, ""+ (int)((mvPrefs.getGfHigh()*100))/100.0)));
+		mvPrefs.setGfLow(Integer.parseInt(prefs.getString(PREFS_ID_GF_LOW, ""+ ((int)(mvPrefs.getGfLow()*100))))/100.0);
+		mvPrefs.setGfHigh(Integer.parseInt(prefs.getString(PREFS_ID_GF_HIGH, ""+ ((int)(mvPrefs.getGfHigh()*100))))/100.0);
 		
 		mvPrefs.setDiveRMV(Double.parseDouble(prefs.getString(PREFS_ID_DIVE_RVM, ""+ mvPrefs.getDiveRMV())));
 		mvPrefs.setDecoRMV(Double.parseDouble(prefs.getString(PREFS_ID_DECO_RVM, ""+ mvPrefs.getDecoRMV())));

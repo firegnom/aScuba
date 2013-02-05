@@ -1,6 +1,7 @@
 package org.ediver.ascuba.gui;
 
 import org.ediver.ascuba.R;
+import org.ediver.ascuba.preferences.SharedPreferencesDAO;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -20,14 +21,17 @@ public class MVPlanPreferences extends PreferenceActivity {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.mvprefs);
 		
-		/*makeDecimal("lastStopDepth");
-		makeNumber("gfHigh");
-		makeNumber("gfLow");
-		makeDecimal("diveRVM");
-		makeDecimal("decoRVM");*/
+		makeDecimal(SharedPreferencesDAO.PREFS_ID_LAST_STOP_DEPTH);
+		makeNumber(SharedPreferencesDAO.PREFS_ID_GF_HIGH);
+		makeNumber(SharedPreferencesDAO.PREFS_ID_GF_LOW);
+		makeDecimal(SharedPreferencesDAO.PREFS_ID_DIVE_RVM);
+		makeDecimal(SharedPreferencesDAO.PREFS_ID_DECO_RVM);
+		makeDecimal(SharedPreferencesDAO.PREFS_ID_DESCENT_RATE);
+		makeDecimal(SharedPreferencesDAO.PREFS_ID_ASCENT_RATE);
+		makeDecimal(SharedPreferencesDAO.PREFS_ID_ALTITUDE);
 		
 		// Get the custom preference
-		/*Preference customPref = (Preference) findPreference("lastStopDepth");
+		Preference customPref = (Preference) findPreference(SharedPreferencesDAO.PREFS_ID_LAST_STOP_DEPTH);
 		customPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 			public boolean onPreferenceChange(Preference preference,
 					Object newValue) {
@@ -37,7 +41,7 @@ public class MVPlanPreferences extends PreferenceActivity {
 						SharedPreferences.Editor editor = customSharedPreference
 								.edit();
 						try {
-							editor.putString("lastStopDepth", ""+Double.parseDouble(newValue.toString()));
+							editor.putString(SharedPreferencesDAO.PREFS_ID_LAST_STOP_DEPTH, ""+Double.parseDouble(newValue.toString()));
 						} catch (NumberFormatException e) {
 							Toast.makeText(getBaseContext(),
 									"Could not set new depth :"+newValue+" make sure it is number",
@@ -50,7 +54,7 @@ public class MVPlanPreferences extends PreferenceActivity {
 					}
 
 
-				});*/
+				});
 	}
 	
 	private void makeDecimal(String key){
