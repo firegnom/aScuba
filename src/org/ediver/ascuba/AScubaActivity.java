@@ -8,6 +8,7 @@ public class AScubaActivity extends Activity {
 	static final int WELCOME = 1;
 	static final int DIVELOG = 2;
 	static final int DIVEPLANNER = 3;
+	static final int ABOUT = 4;
 	
 	
 	void  open(int  activity,boolean close){
@@ -15,6 +16,10 @@ public class AScubaActivity extends Activity {
 		switch (activity){
 			case  WELCOME:
 				i = new Intent(getApplicationContext(),Welcome.class);
+				this.startActivity(i);
+				break;
+			case  ABOUT:
+				i = new Intent(getApplicationContext(),About.class);
 				this.startActivity(i);
 				break;
 			case  DIVELOG:

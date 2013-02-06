@@ -74,6 +74,10 @@ public class DivePlanner extends ActivityGroup {
 		case R.id.quit:
 			this.finish();
 			return true;
+		case R.id.plan_menu_about:
+			Intent i = new Intent(getApplicationContext(),About.class);
+			this.startActivity(i);
+			return true;
 			// Generic catch all for all the other menu resources
 		default:
 			// Don't toast text when a submenu is clicked
