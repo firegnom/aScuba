@@ -31,7 +31,8 @@ public class AScubaActivity extends Activity {
 		}
 	}
 	void  open(int  activity){
-		
 		open(activity,false);
 	}
+	
+	public void onPreferencesChanged(){};
 }

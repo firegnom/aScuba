@@ -8,9 +8,12 @@ import mvplan.main.MvplanInstance;
 
 import org.ediver.ascuba.gui.GasDialog;
 import org.ediver.ascuba.gui.GasDialogCallback;
+import org.ediver.ascuba.preferences.SharedPreferencesDAO;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -36,11 +39,20 @@ public class GasList extends AScubaActivity {
 		list = (ListView) findViewById(R.id.gas_list_list);
 		add = (Button) findViewById(R.id.gas_list_add);
 		add.setOnClickListener(addButtonListener);
-		ocbailout.setChecked(MvplanInstance.getPrefs().getOcDeco());
+		
+	}
+	
+	protected void onResume() {
+		super.onResume();
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		final SharedPreferencesDAO sh = new SharedPreferencesDAO(prefs);
+		boolean sl = sh.getChangeGases();
+		
+		ocbailout.setChecked(sl);
 		ocbailout.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				MvplanInstance.getPrefs().setOcDeco(isChecked);
+				sh.setChangeGases(isChecked);
 				MvplanInstance.getPrefs().validatePrefs();
 			}
 		});
@@ -50,7 +62,7 @@ public class GasList extends AScubaActivity {
 				MvplanInstance.getPrefs().getPrefGases());
 		list.setAdapter(a);
 		
-	}
+	};
 
 	android.view.View.OnClickListener addButtonListener = new android.view.View.OnClickListener() {
 		public void onClick(View v) {
@@ -62,7 +74,10 @@ public class GasList extends AScubaActivity {
 		public void notify(Gas g) {
 			MvplanInstance.getPrefs().getPrefGases().add(g);
 			System.out.println(g);
-			a.notifyDataSetChanged();
+			a = new GasListAdaptor(getApplicationContext(),
+					R.layout.gas_list_label, R.id.gas_list_label_text,
+					MvplanInstance.getPrefs().getPrefGases());
+			list.setAdapter(a);
 
 		}
 	};
@@ -129,6 +144,13 @@ public class GasList extends AScubaActivity {
 			a.insert(g, position);
 			
 		}
+	}
+	
+	public void reloadAdaptor(){
+		a = new GasListAdaptor(this.getApplicationContext(),
+				R.layout.gas_list_label, R.id.gas_list_label_text,
+				MvplanInstance.getPrefs().getPrefGases());
+		list.setAdapter(a);
 	}
 	
 

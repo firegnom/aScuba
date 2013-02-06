@@ -91,11 +91,12 @@ public class DivePlanner extends ActivityGroup {
 	android.view.View.OnClickListener calculateButtonListener = new android.view.View.OnClickListener() {
 		public void onClick(View v) {
 			view.removeAllViews();
-			ProfileView p = (ProfileView) (DivePlanner.this
-					.getLocalActivityManager().getActivity("calculateAction"));
-			p.calculate();
 			view.addView(calculateAction.getDecorView(),
 					LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
+			ProfileView p = (ProfileView) (DivePlanner.this
+					.getLocalActivityManager().getActivity("calculateAction"));
+			
+			p.calculate();
 		}
 	};
 	android.view.View.OnClickListener gasListButtonListener = new android.view.View.OnClickListener() {
@@ -103,6 +104,8 @@ public class DivePlanner extends ActivityGroup {
 			view.removeAllViews();
 			view.addView(gasListAction.getDecorView(),
 					LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
+			GasList g = (GasList)(DivePlanner.this.getLocalActivityManager().getActivity("gasListAction"));
+			g.reloadAdaptor();
 		}
 	};
 	android.view.View.OnClickListener profileButtonListener = new android.view.View.OnClickListener() {
@@ -110,6 +113,8 @@ public class DivePlanner extends ActivityGroup {
 			view.removeAllViews();
 			view.addView(segmentAction.getDecorView(),
 					LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
+			SegmentList s = (SegmentList)(DivePlanner.this.getLocalActivityManager().getActivity("segmentAction"));
+			s.reloadAdaptor();
 		}
 	};
 	
@@ -127,7 +132,6 @@ public class DivePlanner extends ActivityGroup {
 	}
 
 	private void getPrefs() {
-		
 		// Get the xml/preferences.xml preferences
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(getBaseContext());

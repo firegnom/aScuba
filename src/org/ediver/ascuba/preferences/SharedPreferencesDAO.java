@@ -26,7 +26,7 @@ public class SharedPreferencesDAO implements PrefsDAO{
 	//not visible 
 	public static final String PREFS_ID_PREF_GASES = "ascuba.preferences.prefGases";
 	public static final String PREFS_ID_PREF_SEGMENTS = "ascuba.preferences.prefSegments";
-	
+	public static final String PREFS_ID_CHANGE_GASES = "ascuba.preferences.changeGases";
 	
 	public static final String PREFS_ID_SHOW_LATER = "ascuba.preferences.showLater";
 	public static final String PREFS_ID_LAST_STOP_DEPTH = "ascuba.preferences.lastStopDepth";
@@ -109,8 +109,10 @@ public class SharedPreferencesDAO implements PrefsDAO{
 		mvPrefs.setModelClassName(prefs.getString(PREFS_ID_DECO_MODEL,mvPrefs.getModelClassName()));
 		mvPrefs.setGfMultilevelMode(prefs.getBoolean(PREFS_ID_MULTILEVEL,mvPrefs.getGfMultilevelMode()));
 		mvPrefs.setOutputStyle(Integer.parseInt(prefs.getString(PREFS_ID_OUTPUT_STYLE, ""+mvPrefs.getOutputStyle())));
-
+		mvPrefs.setOcDeco(prefs.getBoolean(PREFS_ID_CHANGE_GASES, mvPrefs.getOcDeco()));
+		
 		mvPrefs.validatePrefs();
+		MvplanInstance.setPrefs(mvPrefs);
 		return mvPrefs;
 	}
 	
@@ -163,6 +165,17 @@ public class SharedPreferencesDAO implements PrefsDAO{
 		Editor edit = prefs.edit();
 		edit.putBoolean(SharedPreferencesDAO.PREFS_ID_SHOW_LATER, value);
 		edit.commit();
+	}
+
+	public boolean getChangeGases() {
+		return prefs.getBoolean(SharedPreferencesDAO.PREFS_ID_CHANGE_GASES, MvplanInstance.getPrefs().getOcDeco());
+	}
+	
+	public void setChangeGases(boolean value) {
+		Editor edit = prefs.edit();
+		edit.putBoolean(SharedPreferencesDAO.PREFS_ID_CHANGE_GASES, value);
+		edit.commit();
+		MvplanInstance.getPrefs().setOcDeco(value);
 	}
 	
 	

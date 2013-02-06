@@ -19,8 +19,6 @@ public class ProfileView extends AScubaActivity {
 	}
 
 	public void calculate() {
-		super.onResume();
-
 		Profile p = new Profile(MvplanInstance.getPrefs().getPrefSegments(),
 				MvplanInstance.getPrefs().getPrefGases(), null);
 		// m.printModel();
@@ -61,5 +59,5 @@ public class ProfileView extends AScubaActivity {
 
 		}
 	}
-
+	
 }

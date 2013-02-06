@@ -27,10 +27,19 @@ public class SegmentList extends AScubaActivity {
 	SegmentListAdaptor a;
 
 	@Override
-	protected void onStart() {
-		super.onStart();
-		setContentView(R.layout.segment_list_view);
+	protected void onResume() {
+		super.onResume();
+		a = new SegmentListAdaptor(this.getApplicationContext(),
+				R.layout.segment_list_label, R.id.segment_list_label_text,
+				MvplanInstance.getPrefs().getPrefSegments());
+		list.setAdapter(a);
+	};
+	
 
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.segment_list_view);
 		list = (ListView) findViewById(R.id.segment_list_list);
 		add = (Button) findViewById(R.id.segment_list_add);
 		add.setOnClickListener(addButtonListener);
@@ -38,13 +47,6 @@ public class SegmentList extends AScubaActivity {
 				R.layout.segment_list_label, R.id.segment_list_label_text,
 				MvplanInstance.getPrefs().getPrefSegments());
 		list.setAdapter(a);
-		
-	};
-	
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 
 	}
 
@@ -58,7 +60,10 @@ public class SegmentList extends AScubaActivity {
 		public void notify(SegmentAbstract g) {
 			MvplanInstance.getPrefs().getPrefSegments().add(g);
 			System.out.println(g);
-			a.notifyDataSetChanged();
+			a = new SegmentListAdaptor(getApplicationContext(),
+					R.layout.segment_list_label, R.id.segment_list_label_text,
+					MvplanInstance.getPrefs().getPrefSegments());
+			list.setAdapter(a);
 
 		}
 	};
@@ -138,6 +143,13 @@ public class SegmentList extends AScubaActivity {
 			a.insert(g, position);
 
 		}
+	}
+	
+	public void reloadAdaptor(){
+		a = new SegmentListAdaptor(getApplicationContext(),
+				R.layout.segment_list_label, R.id.segment_list_label_text,
+				MvplanInstance.getPrefs().getPrefSegments());
+		list.setAdapter(a);
 	}
 
 }
