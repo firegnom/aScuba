@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Hello World, Dives</string>
-    <string name="app_name">Dive Planner</string>
+    <string name="app_name">aScuba BETA</string>
     <string name="menunewdive">New Dive</string>
     <string name="date_widgets_example_dateDisplay_text"></string>
     <string name="date_widgets_example_pickTime_text">change the time</string>
@@ -37,8 +36,8 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
     <string name="plan_menu_about">About</string>
     <string name="about_text" formatted="false">
         &lt;b&gt;Main contributors :&lt;/b&gt;&lt;br&gt;
-        Guy Wittig - author of mv-Plan &lt;br&gt;
 		Maciej Kaniewski - contributor to mvPlan and author of aScuba.&lt;br&gt;
+        Guy Wittig - author of mv-Plan &lt;br&gt;
 		&lt;br&gt;
 		&lt;b&gt;Thanks to :&lt;/b&gt;&lt;br&gt;
 		Fabrice Cetre&lt;br&gt;
